@@ -42,7 +42,7 @@
             cell.append("rect")
                 .attr("width", d => d.x1 - d.x0)
                 .attr("height", d => d.y1 - d.y0)
-                .style("fill", d => colorScheme(d.data.name));
+                .style("fill", d => colorScheme(d.data.name))
 
             // Adicione barras horizontais representando parcelas
             cell.append("rect")
@@ -58,14 +58,16 @@
                 .style("font-size", "20px")
                 .style("font-style", "italic")
                 .style("font-weight", "bold")
+                .style("fill", "white")
                 .text(d => d.data.name);
 
             // Valor Total
             cell.append("text")
                 .attr("x", 3)
-                .attr("y", 33)
+                .attr("y", 35)
                 .style("font-size", "18px")
                 .style("font-weight", "bold")
+                .style("fill", "white")
                 .text(d => d.data.totalValue)
 
             // Valor da Parcela
