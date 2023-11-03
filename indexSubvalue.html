@@ -24,7 +24,7 @@
 
             var treemap = d3.treemap()
                 .size([width, height])
-                .padding(1.5)
+                .padding(2)
                 .round(true);
 
             var root = d3.hierarchy({ children: data })
@@ -43,13 +43,14 @@
                 .attr("width", d => d.x1 - d.x0)
                 .attr("height", d => d.y1 - d.y0)
                 .style("fill", d => colorScheme(d.data.name))
+                .style("fill-opacity", 0.6)
 
-            // Adicione barras horizontais representando parcelas
+            // Adicione barras horizontais representando parcelas sem sombra
             cell.append("rect")
                 .attr("width", d => d.x1 - d.x0)
                 .attr("height", d => (d.y1 - d.y0) * (d.data.sliceValue / d.data.totalValue))
                 .attr("y", d => (d.y1 - d.y0) - (d.y1 - d.y0) * (d.data.sliceValue / d.data.totalValue))
-                .style("fill-opacity", 0.22)
+                .style("fill", d => colorScheme(d.data.name))
 
             // Genero
             cell.append("text")
