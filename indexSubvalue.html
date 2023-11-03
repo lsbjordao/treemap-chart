@@ -48,8 +48,8 @@
             // Adicione barras horizontais representando parcelas sem sombra
             cell.append("rect")
                 .attr("width", d => d.x1 - d.x0)
-                .attr("height", d => (d.y1 - d.y0) * (d.data.sliceValue / d.data.totalValue))
-                .attr("y", d => (d.y1 - d.y0) - (d.y1 - d.y0) * (d.data.sliceValue / d.data.totalValue))
+                .attr("height", d => (d.y1 - d.y0) * (d.data.partialValue / d.data.totalValue))
+                .attr("y", d => (d.y1 - d.y0) - (d.y1 - d.y0) * (d.data.partialValue / d.data.totalValue))
                 .style("fill", d => colorScheme(d.data.name))
 
             // Genero
@@ -62,7 +62,7 @@
                 .style("fill", "white")
                 .text(d => d.data.name);
 
-            // Valor Total
+            // Valor do total
             cell.append("text")
                 .attr("x", 3)
                 .attr("y", 35)
@@ -71,14 +71,14 @@
                 .style("fill", "white")
                 .text(d => d.data.totalValue)
 
-            // Valor da Parcela
+            // Valor do parcial
             cell.append("text")
                 .attr("x", 3)
                 .attr("y", d => d.y1 - d.y0 - 4)
                 .style("font-size", "18px")
                 .style("font-weight", "bold")
                 .style("fill", "white")
-                .text(d => d.data.sliceValue);
+                .text(d => d.data.partialValue);
         });
     </script>
 </body>
