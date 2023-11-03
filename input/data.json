@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Categoria 1",
+        "totalValue": 10,
+        "sliceValue": 2
+    },
+    {
+        "name": "Categoria 2",
+        "totalValue": 15,
+        "sliceValue": 5
+    },
+    {
+        "name": "Categoria 3",
+        "totalValue": 8,
+        "sliceValue": 2
+    },
+    {
+        "name": "Categoria 4",
+        "totalValue": 40,
+        "sliceValue": 12
+    },
+    {
+        "name": "Categoria 5",
+        "totalValue": 30,
+        "sliceValue": 7
+    },
+    {
+        "name": "Categoria 6",
+        "totalValue": 20,
+        "sliceValue": 4
+    },
+    {
+        "name": "Categoria 7",
+        "totalValue": 50,
+        "sliceValue": 15
+    },
+    {
+        "name": "Categoria 8",
+        "totalValue": 60,
+        "sliceValue": 18
+    }
+]

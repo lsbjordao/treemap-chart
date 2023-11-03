@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Exemplo de TreeMap com D3.js</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body style="margin: 0; padding: 0;">
+    <div id="container" style="width: 100vw; height: 99vh;"></div>
+
+    <script>
+
+        d3.json('./input/data.json').then(function (data) {
+            var container = d3.select("#container");
+            var width = container.node().getBoundingClientRect().width;
+            var height = container.node().getBoundingClientRect().height;
+
+            var svg = container.append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+            var treemap = d3.treemap()
+                .size([width, height])
+                .padding(1)
+                .round(true);
+
+            var root = d3.hierarchy({ children: data })
+                .sum(d => d.totalValue);
+
+            treemap(root);
+
+            var cell = svg.selectAll("g")
+                .data(root.leaves())
+                .enter().append("g")
+                .attr("transform", d => `translate(${d.x0},${d.y0})`);
+
+            cell.append("rect")
+                .attr("width", d => d.x1 - d.x0)
+                .attr("height", d => d.y1 - d.y0)
+                .style("fill", "lightblue");
+
+            // Adicione barras horizontais representando parcelas
+            cell.append("rect")
+                .attr("width", d => d.x1 - d.x0)
+                .attr("height", d => (d.y1 - d.y0) * (d.data.sliceValue / d.data.totalValue))
+                .attr("y", d => (d.y1 - d.y0) - (d.y1 - d.y0) * (d.data.sliceValue / d.data.totalValue))
+                .style("fill", "rgba(0, 0, 0, 0.2)");
+
+            // Genero
+            cell.append("text")
+                .attr("x", 3)
+                .attr("y", 13)
+                .style("font-style", "italic")
+                .text(d => d.data.name);
+
+            // Valor Total
+            cell.append("text")
+                .attr("x", 3)
+                .attr("y", 26)
+                .text(d => d.data.totalValue);
+
+            // Valor da Parcela
+            cell.append("text")
+                .attr("x", 3)
+                .attr("y", d => d.y1 - d.y0 - 4)
+                .text(d => d.data.sliceValue);
+        });
+    </script>
+</body>
+
+</html>
