@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Categoria 1",
+        "total": 10,
+        "partial": 2
+    },
+    {
+        "name": "Categoria 2",
+        "total": 15,
+        "partial": 5
+    },
+    {
+        "name": "Categoria 3",
+        "total": 8,
+        "partial": 2
+    },
+    {
+        "name": "Categoria 4",
+        "total": 40,
+        "partial": 12
+    },
+    {
+        "name": "Categoria 5",
+        "total": 30,
+        "partial": 7
+    },
+    {
+        "name": "Categoria 6",
+        "total": 20,
+        "partial": 4
+    },
+    {
+        "name": "Categoria 7",
+        "total": 50,
+        "partial": 15
+    },
+    {
+        "name": "Categoria 8",
+        "total": 60,
+        "partial": 18
+    }
+]

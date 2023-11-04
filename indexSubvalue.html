@@ -28,7 +28,7 @@
                 .round(true);
 
             var root = d3.hierarchy({ children: data })
-                .sum(d => d.totalValue)
+                .sum(d => d.total)
                 .sort((a, b) => b.value - a.value);
 
             treemap(root);
@@ -48,28 +48,49 @@
             // Adicione barras horizontais representando parcelas sem sombra
             cell.append("rect")
                 .attr("width", d => d.x1 - d.x0)
-                .attr("height", d => (d.y1 - d.y0) * (d.data.partialValue / d.data.totalValue))
-                .attr("y", d => (d.y1 - d.y0) - (d.y1 - d.y0) * (d.data.partialValue / d.data.totalValue))
+                .attr("height", d => (d.y1 - d.y0) * (d.data.partial / d.data.total))
+                .attr("y", d => (d.y1 - d.y0) - (d.y1 - d.y0) * (d.data.partial / d.data.total))
                 .style("fill", d => colorScheme(d.data.name))
 
             // Genero
             cell.append("text")
-                .attr("x", 3)
-                .attr("y", 17)
-                .style("font-size", "20px")
+                .attr("x", 1)
+                .attr("y", function (d) {
+                    const total = d.data.total;
+                    if (total > 300) {
+                        return 63;
+                    } else if (total > 135 && total <= 300) {
+                        return 51;
+                    } else if (total > 100 && total <= 135) {
+                        return 31;
+                    } else if (total > 90 && total <= 100) {
+                        return 25;
+                    } else if (total > 70 && total <= 90) {
+                        return 25;
+                    } else if (total > 50 && total <= 70) {
+                        return 20;
+                    } else {
+                        return 17;
+                    }
+                })
+                .style("font-size", function (d) {
+                    var total = d.data.total;
+                    var fontSize = 14 + (total / 5);
+                    return fontSize
+                })
                 .style("font-style", "italic")
                 .style("font-weight", "bold")
-                .style("fill", "white")
-                .text(d => d.data.name);
+                .style("fill", "rgba(0, 0, 0, 0.8)")
+                .text(d => d.data.name)
 
             // Valor do total
             cell.append("text")
-                .attr("x", 3)
-                .attr("y", 35)
+                .attr("x", d => d.x1 - d.x0 - 30)
+                .attr("y", 19)
                 .style("font-size", "18px")
                 .style("font-weight", "bold")
-                .style("fill", "white")
-                .text(d => d.data.totalValue)
+                .style("fill", "rgba(0, 0, 0, 0.4)")
+                .text(d => d.data.total)
 
             // Valor do parcial
             cell.append("text")
@@ -77,8 +98,8 @@
                 .attr("y", d => d.y1 - d.y0 - 4)
                 .style("font-size", "18px")
                 .style("font-weight", "bold")
-                .style("fill", "white")
-                .text(d => d.data.partialValue);
+                .style("fill", "rgba(0, 0, 0, 0.4)")
+                .text(d => d.data.partial);
         });
     </script>
 </body>
